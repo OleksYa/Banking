@@ -1,0 +1,149 @@
+<Window x:Class="EasyBankingZinsüberschuss.Datenpräsentation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="EasyBanking Zinsüberschuss"
+        Width="900"
+        Height="760"
+        MinWidth="760"
+        MinHeight="640"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded">
+    <DockPanel Background="#F5F7FA">
+        <Border DockPanel.Dock="Top" Background="#1F3A5F" Padding="18">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBlock Text="EasyBanking Geschäftsbericht"
+                               Foreground="White"
+                               FontSize="24"
+                               FontWeight="SemiBold" />
+                    <TextBlock x:Name="DatenbankPfadTextBlock"
+                               Foreground="#D8E3F0"
+                               FontSize="13"
+                               Margin="0,4,0,0"
+                               Text="Keine Datenbank geladen" />
+                </StackPanel>
+                <Button Grid.Column="1"
+                        Content="Datenbank auswählen"
+                        Padding="18,10"
+                        Margin="18,0,0,0"
+                        VerticalAlignment="Center"
+                        Click="DatenbankAuswählen_Click" />
+            </Grid>
+        </Border>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <Grid Margin="22">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Border Background="White" BorderBrush="#D8DEE8" BorderThickness="1" CornerRadius="6" Padding="16">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <TextBlock Text="Periode" Foreground="#56657A" />
+                            <TextBox x:Name="PeriodeTextBox" IsReadOnly="True" Margin="0,6,10,0" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="Zinsertrag" Foreground="#56657A" />
+                            <TextBox x:Name="ZinsertragTextBox" IsReadOnly="True" Margin="0,6,10,0" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Zinsüberschuss brutto" Foreground="#56657A" />
+                            <TextBox x:Name="ZinsüberschussBruttoTextBox" IsReadOnly="True" Margin="0,6,0,0" FontWeight="SemiBold" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <GroupBox Grid.Row="1" Header="Zinsertrag" Margin="0,18,0,0" Padding="14">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Zins Konsumkredit" />
+                        <TextBox x:Name="ZinsKonsumkreditTextBox" Grid.Column="1" IsReadOnly="True" Margin="8,0,0,8" />
+
+                        <TextBlock Grid.Row="1" Text="Zins Autokredit" />
+                        <TextBox x:Name="ZinsAutokreditTextBox" Grid.Row="1" Grid.Column="1" IsReadOnly="True" Margin="8,0,0,8" />
+
+                        <TextBlock Grid.Row="2" Text="Zins Hypothekenkredit" />
+                        <TextBox x:Name="ZinsHypothekenkreditTextBox" Grid.Row="2" Grid.Column="1" IsReadOnly="True" Margin="8,0,0,8" />
+
+                        <TextBlock Grid.Row="3" Text="Forderungen an Kunden" FontWeight="SemiBold" />
+                        <TextBox x:Name="ForderungenAnKundenTextBox" Grid.Row="3" Grid.Column="1" IsReadOnly="True" Margin="8,0,0,8" />
+
+                        <TextBlock Grid.Row="4" Text="Sonstige Forderungen an Kreditinstitute" />
+                        <TextBox x:Name="SonstigeForderungenAnKreditinstituteTextBox" Grid.Row="4" Grid.Column="1" IsReadOnly="True" Margin="8,0,0,0" />
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox Grid.Row="2" Header="Zinsaufwand" Margin="0,18,0,0" Padding="14">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Zins Girokonto" />
+                        <TextBox x:Name="ZinsGirokontoTextBox" Grid.Column="1" IsReadOnly="True" Margin="8,0,0,8" />
+
+                        <TextBlock Grid.Row="1" Text="Zins Spareinlage" />
+                        <TextBox x:Name="ZinsSpareinlageTextBox" Grid.Row="1" Grid.Column="1" IsReadOnly="True" Margin="8,0,0,8" />
+
+                        <TextBlock Grid.Row="2" Text="Zins Termingeld" />
+                        <TextBox x:Name="ZinsTermingeldTextBox" Grid.Row="2" Grid.Column="1" IsReadOnly="True" Margin="8,0,0,8" />
+
+                        <TextBlock Grid.Row="3" Text="Verbindlichkeiten gegenüber Kunden" FontWeight="SemiBold" />
+                        <TextBox x:Name="VerbindlichkeitenGegenüberKundenTextBox" Grid.Row="3" Grid.Column="1" IsReadOnly="True" Margin="8,0,0,8" />
+
+                        <TextBlock Grid.Row="4" Text="Überziehungskredit" />
+                        <TextBox x:Name="ÜberziehungskreditTextBox" Grid.Row="4" Grid.Column="1" IsReadOnly="True" Margin="8,0,0,8" />
+
+                        <TextBlock Grid.Row="5" Text="Verbindlichkeiten gegenüber Kreditinstituten" />
+                        <TextBox x:Name="VerbindlichkeitenGegenüberKreditinstitutenTextBox" Grid.Row="5" Grid.Column="1" IsReadOnly="True" Margin="8,0,0,8" />
+
+                        <TextBlock Grid.Row="6" Text="Sonstiges" />
+                        <TextBox x:Name="SonstigesTextBox" Grid.Row="6" Grid.Column="1" IsReadOnly="True" Margin="8,0,0,8" />
+
+                        <TextBlock Grid.Row="7" Text="Zinsaufwand" FontWeight="SemiBold" />
+                        <TextBox x:Name="ZinsaufwandTextBox" Grid.Row="7" Grid.Column="1" IsReadOnly="True" Margin="8,0,0,0" />
+                    </Grid>
+                </GroupBox>
+
+                <TextBlock x:Name="StatusTextBlock"
+                           Grid.Row="3"
+                           Foreground="#56657A"
+                           Margin="0,14,0,0"
+                           Text="Bitte wählen Sie eine Datenbank aus." />
+            </Grid>
+        </ScrollViewer>
+    </DockPanel>
+</Window>
