@@ -66,11 +66,6 @@
             Autor: TODO Name, Matrikelnummer: TODO
             </summary>
         </member>
-        <member name="M:EasyBankingZinsüberschuss.Datenhaltung.Kredit.#ctor">
-            <summary>
-            Leerer Konstruktor.
-            </summary>
-        </member>
         <member name="P:EasyBankingZinsüberschuss.Datenhaltung.Kredit.ID">
             <summary>
             ID der Entität.
@@ -96,15 +91,15 @@
             Höhe der Forderungen an andere Banken in dieser Periode.
             </summary>
         </member>
+        <member name="M:EasyBankingZinsüberschuss.Datenhaltung.Kredit.#ctor">
+            <summary>
+            Leerer Konstruktor.
+            </summary>
+        </member>
         <member name="T:EasyBankingZinsüberschuss.Datenhaltung.Periode">
             <summary>
             Entitäts-/Transferklasse zur Aufnahme der Werte einer Zeile der Tabelle 'Perioden'.
             Autor: TODO Name, Matrikelnummer: TODO
-            </summary>
-        </member>
-        <member name="M:EasyBankingZinsüberschuss.Datenhaltung.Periode.#ctor">
-            <summary>
-            Leerer Konstruktor.
             </summary>
         </member>
         <member name="P:EasyBankingZinsüberschuss.Datenhaltung.Periode.ID">
@@ -122,6 +117,11 @@
             Spalte 'Ende'.
             </summary>
         </member>
+        <member name="M:EasyBankingZinsüberschuss.Datenhaltung.Periode.#ctor">
+            <summary>
+            Leerer Konstruktor.
+            </summary>
+        </member>
         <member name="M:EasyBankingZinsüberschuss.Datenhaltung.Periode.ToString">
             <summary>
             Erstellt eine druckbare Darstellung der Periode.
@@ -132,11 +132,6 @@
             <summary>
             Entitäts-/Transferklasse für die Volumina des Neugeschäfts einer Periode bezüglich der sechs Bankprodukte.
             Autor: TODO Name, Matrikelnummer: TODO
-            </summary>
-        </member>
-        <member name="M:EasyBankingZinsüberschuss.Datenhaltung.VolumenNeugeschäft.#ctor">
-            <summary>
-            Leerer Konstruktor.
             </summary>
         </member>
         <member name="P:EasyBankingZinsüberschuss.Datenhaltung.VolumenNeugeschäft.ID">
@@ -179,15 +174,15 @@
             Volumen Neugeschäft für Termingelder.
             </summary>
         </member>
+        <member name="M:EasyBankingZinsüberschuss.Datenhaltung.VolumenNeugeschäft.#ctor">
+            <summary>
+            Leerer Konstruktor.
+            </summary>
+        </member>
         <member name="T:EasyBankingZinsüberschuss.Datenhaltung.Zinssatz">
             <summary>
             Entitäts-/Transferklasse für die Zinssätze einer Periode bezüglich der sechs Bankprodukte.
             Autor: TODO Name, Matrikelnummer: TODO
-            </summary>
-        </member>
-        <member name="M:EasyBankingZinsüberschuss.Datenhaltung.Zinssatz.#ctor">
-            <summary>
-            Leerer Konstruktor.
             </summary>
         </member>
         <member name="P:EasyBankingZinsüberschuss.Datenhaltung.Zinssatz.ID">
@@ -228,6 +223,11 @@
         <member name="P:EasyBankingZinsüberschuss.Datenhaltung.Zinssatz.Termingelder">
             <summary>
             Zinssatz für Termingelder.
+            </summary>
+        </member>
+        <member name="M:EasyBankingZinsüberschuss.Datenhaltung.Zinssatz.#ctor">
+            <summary>
+            Leerer Konstruktor.
             </summary>
         </member>
         <member name="T:EasyBankingZinsüberschuss.Datenpräsentation.App">
@@ -272,11 +272,6 @@
             <summary>
             Klasse für Berechnung Zinsüberschuss brutto mit Zwischenschritten.
             Autor: TODO Name, Matrikelnummer: TODO
-            </summary>
-        </member>
-        <member name="M:EasyBankingZinsüberschuss.Datenverarbeitung.Zinsüberschuss.#ctor(EasyBankingZinsüberschuss.Datenhaltung.VolumenNeugeschäft,EasyBankingZinsüberschuss.Datenhaltung.VolumenNeugeschäft,EasyBankingZinsüberschuss.Datenhaltung.VolumenNeugeschäft,EasyBankingZinsüberschuss.Datenhaltung.VolumenNeugeschäft,EasyBankingZinsüberschuss.Datenhaltung.VolumenNeugeschäft,EasyBankingZinsüberschuss.Datenhaltung.Zinssatz,EasyBankingZinsüberschuss.Datenhaltung.Zinssatz,EasyBankingZinsüberschuss.Datenhaltung.Zinssatz,EasyBankingZinsüberschuss.Datenhaltung.Zinssatz,EasyBankingZinsüberschuss.Datenhaltung.Zinssatz,EasyBankingZinsüberschuss.Datenhaltung.Kredit)">
-            <summary>
-            Konstruktor / Berechnung Zinsüberschuss brutto mit Zwischenschritten.
             </summary>
         </member>
         <member name="P:EasyBankingZinsüberschuss.Datenverarbeitung.Zinsüberschuss.ZinsKonsumkredit">
@@ -352,6 +347,11 @@
         <member name="P:EasyBankingZinsüberschuss.Datenverarbeitung.Zinsüberschuss.ZinsüberschussBrutto">
             <summary>
             Zinsüberschuss brutto.
+            </summary>
+        </member>
+        <member name="M:EasyBankingZinsüberschuss.Datenverarbeitung.Zinsüberschuss.#ctor(EasyBankingZinsüberschuss.Datenhaltung.VolumenNeugeschäft,EasyBankingZinsüberschuss.Datenhaltung.VolumenNeugeschäft,EasyBankingZinsüberschuss.Datenhaltung.VolumenNeugeschäft,EasyBankingZinsüberschuss.Datenhaltung.VolumenNeugeschäft,EasyBankingZinsüberschuss.Datenhaltung.VolumenNeugeschäft,EasyBankingZinsüberschuss.Datenhaltung.Zinssatz,EasyBankingZinsüberschuss.Datenhaltung.Zinssatz,EasyBankingZinsüberschuss.Datenhaltung.Zinssatz,EasyBankingZinsüberschuss.Datenhaltung.Zinssatz,EasyBankingZinsüberschuss.Datenhaltung.Zinssatz,EasyBankingZinsüberschuss.Datenhaltung.Kredit)">
+            <summary>
+            Konstruktor / Berechnung Zinsüberschuss brutto mit Zwischenschritten.
             </summary>
         </member>
     </members>

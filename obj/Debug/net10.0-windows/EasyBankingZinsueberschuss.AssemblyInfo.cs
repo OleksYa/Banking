@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EasyBankingZinsueberschuss")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9d788f7c79da240d8548b3f6e0bc23f2326d14cb")]
 [assembly: System.Reflection.AssemblyProductAttribute("EasyBankingZinsueberschuss")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EasyBankingZinsueberschuss")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
