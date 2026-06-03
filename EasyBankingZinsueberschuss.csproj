@@ -11,8 +11,4 @@
   <ItemGroup>
     <None Include="Beispielbank.accdb" CopyToOutputDirectory="PreserveNewest" Condition="Exists('Beispielbank.accdb')" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Datenhaltung\Datenbank.cs" />
-  </ItemGroup>
 </Project>
