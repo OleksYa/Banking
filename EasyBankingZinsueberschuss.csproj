@@ -10,5 +10,12 @@
 
   <ItemGroup>
     <None Include="Beispielbank.accdb" CopyToOutputDirectory="PreserveNewest" Condition="Exists('Beispielbank.accdb')" />
+    <None Include="Datenbank\Bank.sqlite" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Desktop" Version="12.0.4" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="12.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.8" />
   </ItemGroup>
 </Project>

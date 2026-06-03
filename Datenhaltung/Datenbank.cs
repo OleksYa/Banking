@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace EasyBankingZinsüberschuss.Datenhaltung
 {
@@ -9,10 +11,10 @@ namespace EasyBankingZinsüberschuss.Datenhaltung
         private const decimal MillionenFaktor = 1_000_000.0M;
 
         private static bool _istGeladen;
-        private static Periode[]? _perioden;
-        private static Kredit[]? _kredite;
-        private static VolumenNeugeschäft[]? _voluminaNeugeschäft;
-        private static Zinssatz[]? _zinssätze;
+        private static List<Periode>? _perioden;
+        private static List<Kredit>? _kredite;
+        private static List<VolumenNeugeschäft>? _voluminaNeugeschäft;
+        private static List<Zinssatz>? _zinssätze;
 
         public static bool IstGeladen { get { return _istGeladen; } }
 
@@ -21,7 +23,7 @@ namespace EasyBankingZinsüberschuss.Datenhaltung
             get
             {
                 SicherstellenDassGeladen();
-                return _perioden!.Select(periode => periode.ID).ToArray();
+                return _perioden!.Select(periode => periode.ID).OrderBy(id => id).ToArray();
             }
         }
 
@@ -33,51 +35,24 @@ namespace EasyBankingZinsüberschuss.Datenhaltung
                 throw new Exception("Der Pfad zur Datenbank existiert nicht.");
             }
 
-            _perioden =
-            [
-                ErzeugtePeriode(1, new DateTime(2019, 1, 1), new DateTime(2019, 12, 31)),
-                ErzeugtePeriode(2, new DateTime(2020, 1, 1), new DateTime(2020, 12, 31)),
-                ErzeugtePeriode(3, new DateTime(2021, 1, 1), new DateTime(2021, 12, 31)),
-                ErzeugtePeriode(4, new DateTime(2022, 1, 1), new DateTime(2022, 12, 31)),
-                ErzeugtePeriode(5, new DateTime(2023, 1, 1), new DateTime(2023, 12, 31)),
-                ErzeugtePeriode(6, new DateTime(2024, 1, 1), new DateTime(2024, 12, 31)),
-                ErzeugtePeriode(7, new DateTime(2025, 1, 1), new DateTime(2025, 12, 31))
-            ];
-
-            _kredite =
-            [
-                ErzeugterKredit(1, 1, 0.0M, 4.25M, 2.125M),
-                ErzeugterKredit(2, 2, 0.0M, 4.00M, 2.000M),
-                ErzeugterKredit(3, 3, 2.0M, 3.75M, 1.950M),
-                ErzeugterKredit(4, 4, 0.0M, 2.90M, 1.500M),
-                ErzeugterKredit(5, 5, 1.0M, 3.00M, 1.700M),
-                ErzeugterKredit(6, 6, 0.0M, 3.70M, 2.000M),
-                ErzeugterKredit(7, 7, 0.0M, 4.25M, 2.125M)
-            ];
-
-            _voluminaNeugeschäft =
-            [
-                ErzeugtesVolumenNeugeschäft(1, 1, 1350.0M, 1000.0M, 0900.0M, 1300.0M, 2200.0M, 1100.0M),
-                ErzeugtesVolumenNeugeschäft(2, 2, 1500.0M, 1080.0M, 1000.0M, 1350.0M, 2400.0M, 1200.0M),
-                ErzeugtesVolumenNeugeschäft(3, 3, 1400.0M, 1100.0M, 1000.0M, 1400.0M, 2220.0M, 1150.0M),
-                ErzeugtesVolumenNeugeschäft(4, 4, 1350.0M, 1000.0M, 0900.0M, 1300.0M, 2200.0M, 1100.0M),
-                ErzeugtesVolumenNeugeschäft(5, 5, 1500.0M, 1000.0M, 1100.0M, 1350.0M, 2400.0M, 1500.0M),
-                ErzeugtesVolumenNeugeschäft(6, 6, 1000.0M, 1000.0M, 1200.0M, 1500.0M, 2000.0M, 1200.0M),
-                ErzeugtesVolumenNeugeschäft(7, 7, 1000.0M, 1200.0M, 1000.0M, 2000.0M, 1500.0M, 2000.0M)
-            ];
-
-            _zinssätze =
-            [
-                ErzeugterZinssatz(1, 1, .060, .050, .035, .005, .010, .015),
-                ErzeugterZinssatz(2, 2, .060, .050, .030, .004, .008, .013),
-                ErzeugterZinssatz(3, 3, .055, .045, .030, .003, .007, .011),
-                ErzeugterZinssatz(4, 4, .055, .045, .030, .001, .006, .010),
-                ErzeugterZinssatz(5, 5, .050, .040, .025, .001, .005, .010),
-                ErzeugterZinssatz(6, 6, .050, .040, .025, .001, .005, .010),
-                ErzeugterZinssatz(7, 7, .050, .045, .025, .001, .005, .008)
-            ];
-
-            _istGeladen = true;
+            try
+            {
+                using EasyBankingContext context = new EasyBankingContext(pfadZurDatenbank);
+                _perioden = context.Perioden.AsNoTracking().ToList();
+                _kredite = context.Kredite.AsNoTracking().ToList();
+                _voluminaNeugeschäft = context.VoluminaNeugeschäft.AsNoTracking().ToList();
+                _zinssätze = context.Zinssätze.AsNoTracking().ToList();
+                _istGeladen = true;
+            }
+            catch (Exception ex)
+            {
+                _istGeladen = false;
+                _perioden = null;
+                _kredite = null;
+                _voluminaNeugeschäft = null;
+                _zinssätze = null;
+                throw new Exception("Das Laden der Datentabellen ist fehlgeschlagen.", ex);
+            }
         }
 
         public static Periode Periode(int periodenID)
@@ -89,7 +64,12 @@ namespace EasyBankingZinsüberschuss.Datenhaltung
                 throw new Exception("Die Periodennummer ist unbekannt.");
             }
 
-            return ErzeugtePeriode(periode.ID, periode.Beginn, periode.Ende);
+            return new Periode
+            {
+                ID = periode.ID,
+                Beginn = periode.Beginn,
+                Ende = periode.Ende
+            };
         }
 
         public static Kredit Kredit(int periodenID)
@@ -105,9 +85,9 @@ namespace EasyBankingZinsüberschuss.Datenhaltung
             {
                 ID = kredit.ID,
                 PeriodenID = kredit.PeriodenID,
-                Überziehungskredit = kredit.Überziehungskredit,
-                Verbindlichkeiten = kredit.Verbindlichkeiten,
-                Forderungen = kredit.Forderungen
+                Überziehungskredit = kredit.Überziehungskredit * MillionenFaktor,
+                Verbindlichkeiten = kredit.Verbindlichkeiten * MillionenFaktor,
+                Forderungen = kredit.Forderungen * MillionenFaktor
             };
         }
 
@@ -124,12 +104,12 @@ namespace EasyBankingZinsüberschuss.Datenhaltung
             {
                 ID = volumen.ID,
                 PeriodenID = volumen.PeriodenID,
-                Konsumkredite = volumen.Konsumkredite,
-                Autokredite = volumen.Autokredite,
-                Hypothekenkredite = volumen.Hypothekenkredite,
-                Girokonten = volumen.Girokonten,
-                Spareinlagen = volumen.Spareinlagen,
-                Termingelder = volumen.Termingelder
+                Konsumkredite = volumen.Konsumkredite * MillionenFaktor,
+                Autokredite = volumen.Autokredite * MillionenFaktor,
+                Hypothekenkredite = volumen.Hypothekenkredite * MillionenFaktor,
+                Girokonten = volumen.Girokonten * MillionenFaktor,
+                Spareinlagen = volumen.Spareinlagen * MillionenFaktor,
+                Termingelder = volumen.Termingelder * MillionenFaktor
             };
         }
 
@@ -142,14 +122,17 @@ namespace EasyBankingZinsüberschuss.Datenhaltung
                 throw new Exception("Die Periodennummer ist unbekannt.");
             }
 
-            return ErzeugterZinssatz(zinssatz.ID,
-                                     zinssatz.PeriodenID,
-                                     zinssatz.Konsumkredite,
-                                     zinssatz.Autokredite,
-                                     zinssatz.Hypothekenkredite,
-                                     zinssatz.Girokonten,
-                                     zinssatz.Spareinlagen,
-                                     zinssatz.Termingelder);
+            return new Zinssatz
+            {
+                ID = zinssatz.ID,
+                PeriodenID = zinssatz.PeriodenID,
+                Konsumkredite = zinssatz.Konsumkredite,
+                Autokredite = zinssatz.Autokredite,
+                Hypothekenkredite = zinssatz.Hypothekenkredite,
+                Girokonten = zinssatz.Girokonten,
+                Spareinlagen = zinssatz.Spareinlagen,
+                Termingelder = zinssatz.Termingelder
+            };
         }
 
         private static void SicherstellenDassGeladen()
@@ -160,70 +143,35 @@ namespace EasyBankingZinsüberschuss.Datenhaltung
             }
         }
 
-        private static Periode ErzeugtePeriode(int id, DateTime beginn, DateTime ende)
+        private sealed class EasyBankingContext : DbContext
         {
-            return new Periode
-            {
-                ID = id,
-                Beginn = beginn,
-                Ende = ende
-            };
-        }
+            private readonly string _pfadZurDatenbank;
 
-        private static Kredit ErzeugterKredit(int id, int periodenID, decimal überziehungskredit, decimal verbindlichkeiten, decimal forderungen)
-        {
-            return new Kredit
-            {
-                ID = id,
-                PeriodenID = periodenID,
-                Überziehungskredit = überziehungskredit * MillionenFaktor,
-                Verbindlichkeiten = verbindlichkeiten * MillionenFaktor,
-                Forderungen = forderungen * MillionenFaktor
-            };
-        }
+            public DbSet<Periode> Perioden { get { return Set<Periode>(); } }
 
-        private static VolumenNeugeschäft ErzeugtesVolumenNeugeschäft(int id,
-                                                                      int periodenID,
-                                                                      decimal konsumkredite,
-                                                                      decimal autokredite,
-                                                                      decimal hypothekenkredite,
-                                                                      decimal girokonten,
-                                                                      decimal spareinlagen,
-                                                                      decimal termingelder)
-        {
-            return new VolumenNeugeschäft
-            {
-                ID = id,
-                PeriodenID = periodenID,
-                Konsumkredite = konsumkredite * MillionenFaktor,
-                Autokredite = autokredite * MillionenFaktor,
-                Hypothekenkredite = hypothekenkredite * MillionenFaktor,
-                Girokonten = girokonten * MillionenFaktor,
-                Spareinlagen = spareinlagen * MillionenFaktor,
-                Termingelder = termingelder * MillionenFaktor
-            };
-        }
+            public DbSet<Kredit> Kredite { get { return Set<Kredit>(); } }
 
-        private static Zinssatz ErzeugterZinssatz(int id,
-                                                  int periodenID,
-                                                  double konsumkredite,
-                                                  double autokredite,
-                                                  double hypothekenkredite,
-                                                  double girokonten,
-                                                  double spareinlagen,
-                                                  double termingelder)
-        {
-            return new Zinssatz
+            public DbSet<VolumenNeugeschäft> VoluminaNeugeschäft { get { return Set<VolumenNeugeschäft>(); } }
+
+            public DbSet<Zinssatz> Zinssätze { get { return Set<Zinssatz>(); } }
+
+            public EasyBankingContext(string pfadZurDatenbank)
             {
-                ID = id,
-                PeriodenID = periodenID,
-                Konsumkredite = konsumkredite,
-                Autokredite = autokredite,
-                Hypothekenkredite = hypothekenkredite,
-                Girokonten = girokonten,
-                Spareinlagen = spareinlagen,
-                Termingelder = termingelder
-            };
+                _pfadZurDatenbank = pfadZurDatenbank;
+            }
+
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+            {
+                optionsBuilder.UseSqlite("Data Source=" + _pfadZurDatenbank);
+            }
+
+            protected override void OnModelCreating(ModelBuilder modelBuilder)
+            {
+                modelBuilder.Entity<Periode>().ToTable("Perioden").HasKey(periode => periode.ID);
+                modelBuilder.Entity<Kredit>().ToTable("Kredite").HasKey(kredit => kredit.ID);
+                modelBuilder.Entity<VolumenNeugeschäft>().ToTable("VoluminaNeugeschäft").HasKey(volumen => volumen.ID);
+                modelBuilder.Entity<Zinssatz>().ToTable("Zinssätze").HasKey(zinssatz => zinssatz.ID);
+            }
         }
     }
 }

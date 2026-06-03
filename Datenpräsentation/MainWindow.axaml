@@ -1,0 +1,101 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="EasyBankingZinsüberschuss.Datenpräsentation.MainWindow"
+        Title="EasyBanking Zinsüberschuss"
+        Width="920"
+        Height="660"
+        MinWidth="760"
+        MinHeight="560">
+  <Grid RowDefinitions="Auto,Auto,*,Auto" Margin="24" RowSpacing="18">
+    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="18">
+      <StackPanel Spacing="4">
+        <TextBlock Text="EasyBanking Zinsüberschuss"
+                   FontSize="28"
+                   FontWeight="SemiBold" />
+        <TextBlock Text="Datenvorstellung mit AvaloniaUI und AXAML"
+                   Foreground="{DynamicResource ThemeForegroundLowBrush}" />
+      </StackPanel>
+
+      <StackPanel Grid.Column="1" Spacing="6" Width="220">
+        <TextBlock Text="Periode" FontWeight="SemiBold" />
+        <ComboBox x:Name="PeriodenAuswahl" HorizontalAlignment="Stretch" />
+      </StackPanel>
+    </Grid>
+
+    <Border Grid.Row="1"
+            BorderBrush="{DynamicResource ThemeBorderLowBrush}"
+            BorderThickness="1"
+            CornerRadius="6"
+            Padding="16">
+      <Grid ColumnDefinitions="*,*,*" ColumnSpacing="18">
+        <StackPanel Spacing="4">
+          <TextBlock Text="Zinsertrag" Foreground="{DynamicResource ThemeForegroundLowBrush}" />
+          <TextBlock x:Name="ZinsertragText" FontSize="24" FontWeight="SemiBold" />
+        </StackPanel>
+        <StackPanel Grid.Column="1" Spacing="4">
+          <TextBlock Text="Zinsaufwand" Foreground="{DynamicResource ThemeForegroundLowBrush}" />
+          <TextBlock x:Name="ZinsaufwandText" FontSize="24" FontWeight="SemiBold" />
+        </StackPanel>
+        <StackPanel Grid.Column="2" Spacing="4">
+          <TextBlock Text="Zinsüberschuss brutto" Foreground="{DynamicResource ThemeForegroundLowBrush}" />
+          <TextBlock x:Name="ZinsueberschussText" FontSize="24" FontWeight="SemiBold" />
+        </StackPanel>
+      </Grid>
+    </Border>
+
+    <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="18">
+      <Border BorderBrush="{DynamicResource ThemeBorderLowBrush}"
+              BorderThickness="1"
+              CornerRadius="6"
+              Padding="16">
+        <StackPanel Spacing="12">
+          <TextBlock Text="Ertragsseite" FontSize="18" FontWeight="SemiBold" />
+          <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+                ColumnDefinitions="*,Auto"
+                RowSpacing="10"
+                ColumnSpacing="18">
+            <TextBlock Text="Konsumkredite" />
+            <TextBlock x:Name="ZinsKonsumkreditText" Grid.Column="1" HorizontalAlignment="Right" />
+            <TextBlock Grid.Row="1" Text="Autokredite" />
+            <TextBlock x:Name="ZinsAutokreditText" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" />
+            <TextBlock Grid.Row="2" Text="Hypothekenkredite" />
+            <TextBlock x:Name="ZinsHypothekenkreditText" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" />
+            <TextBlock Grid.Row="3" Text="Sonstige Forderungen an Kreditinstitute" />
+            <TextBlock x:Name="ForderungenText" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" />
+            <TextBlock Grid.Row="4" Text="Summe Zinsertrag" FontWeight="SemiBold" />
+            <TextBlock x:Name="ZinsertragDetailText" Grid.Row="4" Grid.Column="1" FontWeight="SemiBold" HorizontalAlignment="Right" />
+          </Grid>
+        </StackPanel>
+      </Border>
+
+      <Border Grid.Column="1"
+              BorderBrush="{DynamicResource ThemeBorderLowBrush}"
+              BorderThickness="1"
+              CornerRadius="6"
+              Padding="16">
+        <StackPanel Spacing="12">
+          <TextBlock Text="Aufwandsseite" FontSize="18" FontWeight="SemiBold" />
+          <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+                ColumnDefinitions="*,Auto"
+                RowSpacing="10"
+                ColumnSpacing="18">
+            <TextBlock Text="Girokonten" />
+            <TextBlock x:Name="ZinsGirokontoText" Grid.Column="1" HorizontalAlignment="Right" />
+            <TextBlock Grid.Row="1" Text="Spareinlagen" />
+            <TextBlock x:Name="ZinsSpareinlageText" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" />
+            <TextBlock Grid.Row="2" Text="Termingelder" />
+            <TextBlock x:Name="ZinsTermingeldText" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" />
+            <TextBlock Grid.Row="3" Text="Sonstiges" />
+            <TextBlock x:Name="SonstigesText" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" />
+            <TextBlock Grid.Row="4" Text="Summe Zinsaufwand" FontWeight="SemiBold" />
+            <TextBlock x:Name="ZinsaufwandDetailText" Grid.Row="4" Grid.Column="1" FontWeight="SemiBold" HorizontalAlignment="Right" />
+          </Grid>
+        </StackPanel>
+      </Border>
+    </Grid>
+
+    <TextBlock x:Name="StatusText"
+               Grid.Row="3"
+               Foreground="{DynamicResource ThemeForegroundLowBrush}" />
+  </Grid>
+</Window>
