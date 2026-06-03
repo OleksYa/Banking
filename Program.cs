@@ -16,11 +16,11 @@ namespace EasyBankingZinsüberschuss
 
             Console.WriteLine("EasyBanking Zinsüberschuss");
             Console.WriteLine();
-            Console.WriteLine("Dieser Konsolenmodus ist für macOS/Linux, damit das Projekt dort gebaut und ausgeführt werden kann.");
-            Console.WriteLine("Die grafische WPF-Anwendung und das Lesen der Access-Datenbank benötigen Windows.");
+            Console.WriteLine("Dieses Projekt ist eine Konsolenanwendung.");
+            Console.WriteLine("Die Berechnung kann mit Demodaten ausgeführt werden.");
             Console.WriteLine();
             Console.WriteLine("Demo ausführen:");
-            Console.WriteLine("dotnet run -f net10.0 -- --demo");
+            Console.WriteLine("dotnet run -- --demo");
         }
 
         private static void DemoAusführen()

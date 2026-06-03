@@ -1,25 +1,19 @@
 # EasyBanking Zinsüberschuss
 
-## macOS/Linux
+## Run
 
-Build and run the cross-platform console target:
+Install the .NET 10 SDK first.
+
+Build and run the console app:
 
 ```bash
-dotnet run -f net10.0
+dotnet run
 ```
 
 Run the calculation demo:
 
 ```bash
-dotnet run -f net10.0 -- --demo
+dotnet run -- --demo
 ```
 
-The graphical WPF application and Access database reading require Windows.
-
-## Windows
-
-Run the WPF application:
-
-```bash
-dotnet run -f net10.0-windows
-```
+The project is console-only. The old WPF user interface was removed.
