@@ -6,10 +6,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EasyBankingZinsüberschuss.Datenhaltung
 {
-    /// <summary>
-    /// Dies ist die statische Klasse zum gekapselten Zugriff auf die Datenbank.
-    /// Autor: TODO Name, Matrikelnummer: TODO
-    /// </summary>
     public static class Datenbank
     {
         private const decimal MillionenFaktor = 1_000_000m;
@@ -18,16 +14,10 @@ namespace EasyBankingZinsüberschuss.Datenhaltung
         private static List<VolumenNeugeschäft>? _volumenNeugeschäfte;
         private static List<Zinssatz>? _zinssätze;
         private static List<Kredit>? _kredite;
-
-        /// <summary>
-        /// Diese Eigenschaft gibt an, ob Zugriff auf eine Datenbank besteht.
-        /// </summary>
+        
         public static bool IstGeladen { get { return _istGeladen; } }
 
-        /// <summary>
-        /// Auflistung aller Periodennummern der geladenen Datenbank.
-        /// </summary>
-        /// <exception cref="Exception">Wird ausgelöst, falls keine Datenbank geladen ist.</exception>
+        
         public static int[] PeriodenIDs
         {
             get
@@ -36,12 +26,7 @@ namespace EasyBankingZinsüberschuss.Datenhaltung
                 return _perioden!.Select(periode => periode.ID).OrderBy(id => id).ToArray();
             }
         }
-
-        /// <summary>
-        /// Lädt eine Datenbank.
-        /// </summary>
-        /// <param name="pfadZurDatenbank">Pfad zur Datenbank.</param>
-        /// <exception cref="Exception">Wird ausgelöst, falls der Pfad nicht existiert oder das Laden fehlschlägt.</exception>
+        
         public static void DatenbankAuslesen(string pfadZurDatenbank)
         {
             if (String.IsNullOrWhiteSpace(pfadZurDatenbank) || !File.Exists(pfadZurDatenbank))
@@ -69,13 +54,7 @@ namespace EasyBankingZinsüberschuss.Datenhaltung
                 throw new Exception("Das Laden der Datentabellen ist fehlgeschlagen.", ex);
             }
         }
-
-        /// <summary>
-        /// Liefert zur angegebenen Periodennummer die zugehörige Zeile der Tabelle 'Perioden'.
-        /// </summary>
-        /// <param name="periodenID">Periodennummer.</param>
-        /// <returns>Zugehörige Zeile der Tabelle 'Perioden'.</returns>
-        /// <exception cref="Exception">Wird bei nicht geladener Datenbank oder unbekannter Periodennummer ausgelöst.</exception>
+        
         public static Periode Periode(int periodenID)
         {
             SicherstellenDassGeladen();
@@ -93,12 +72,7 @@ namespace EasyBankingZinsüberschuss.Datenhaltung
             };
         }
 
-        /// <summary>
-        /// Liefert zur angegebenen Periodennummer die zugehörige Zeile der Tabelle 'VoluminaNeugeschäft'.
-        /// </summary>
-        /// <param name="periodenID">Periodennummer.</param>
-        /// <returns>Zugehörige Zeile der Tabelle 'VoluminaNeugeschäft'.</returns>
-        /// <exception cref="Exception">Wird bei nicht geladener Datenbank oder unbekannter Periodennummer ausgelöst.</exception>
+        
         public static VolumenNeugeschäft VolumenNeugeschäft(int periodenID)
         {
             SicherstellenDassGeladen();
@@ -120,13 +94,7 @@ namespace EasyBankingZinsüberschuss.Datenhaltung
                 Termingelder = volumen.Termingelder * MillionenFaktor
             };
         }
-
-        /// <summary>
-        /// Liefert zur angegebenen Periodennummer die zugehörige Zeile der Tabelle 'Zinssätze'.
-        /// </summary>
-        /// <param name="periodenID">Periodennummer.</param>
-        /// <returns>Zugehörige Zeile der Tabelle 'Zinssätze'.</returns>
-        /// <exception cref="Exception">Wird bei nicht geladener Datenbank oder unbekannter Periodennummer ausgelöst.</exception>
+        
         public static Zinssatz Zinssatz(int periodenID)
         {
             SicherstellenDassGeladen();
@@ -148,13 +116,7 @@ namespace EasyBankingZinsüberschuss.Datenhaltung
                 Termingelder = zinssatz.Termingelder
             };
         }
-
-        /// <summary>
-        /// Liefert zur angegebenen Periodennummer die zugehörige Zeile der Tabelle 'Kredite'.
-        /// </summary>
-        /// <param name="periodenID">Periodennummer.</param>
-        /// <returns>Zugehörige Zeile der Tabelle 'Kredite'.</returns>
-        /// <exception cref="Exception">Wird bei nicht geladener Datenbank oder unbekannter Periodennummer ausgelöst.</exception>
+        
         public static Kredit Kredit(int periodenID)
         {
             SicherstellenDassGeladen();
