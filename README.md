@@ -2,8 +2,6 @@
 
 ## Run
 
-Install the .NET 10 SDK first.
-
 Build and run the console app:
 
 ```bash
@@ -16,4 +14,4 @@ Run the calculation demo:
 dotnet run -- --demo
 ```
 
-The project is console-only. The old WPF user interface was removed.
+The project is console-only.
