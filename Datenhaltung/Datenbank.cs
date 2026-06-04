@@ -6,6 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EasyBankingZinsüberschuss.Datenhaltung
 {
+    /// <summary>
+    /// Dies ist die statische Klasse zum gekapselten Zugriff auf die Datenbank.
+    /// Autor: Oleksandr Yampolskyi 106851
+    /// </summary>
     public static class Datenbank
     {
         private const decimal MillionenFaktor = 1_000_000.0M;
@@ -16,8 +20,14 @@ namespace EasyBankingZinsüberschuss.Datenhaltung
         private static List<VolumenNeugeschäft>? _voluminaNeugeschäft;
         private static List<Zinssatz>? _zinssätze;
 
+        /// <summary>
+        /// Diese Eigenschaft gibt an, ob Zugriff auf eine Datenbank besteht.
+        /// </summary>
         public static bool IstGeladen { get { return _istGeladen; } }
 
+        /// <summary>
+        /// Dies ist die Auflistung aller Periodennummern der geladenen Datenbank.
+        /// </summary>
         public static int[] PeriodenIDs
         {
             get
@@ -27,6 +37,10 @@ namespace EasyBankingZinsüberschuss.Datenhaltung
             }
         }
 
+        /// <summary>
+        /// Methode zum Laden einer Datenbank.
+        /// </summary>
+        /// <param name="pfadZurDatenbank">Pfad zur Datenbank.</param>
         public static void DatenbankAuslesen(string pfadZurDatenbank)
         {
             if (String.IsNullOrWhiteSpace(pfadZurDatenbank) || !File.Exists(pfadZurDatenbank))
@@ -55,6 +69,11 @@ namespace EasyBankingZinsüberschuss.Datenhaltung
             }
         }
 
+        /// <summary>
+        /// Diese Methode liefert zur angegebenen Periodennummer die zugehörige Zeile in der Tabelle 'Perioden'.
+        /// </summary>
+        /// <param name="periodenID">Periodennummer.</param>
+        /// <returns>Zugehörige Zeile der Tabelle 'Perioden'.</returns>
         public static Periode Periode(int periodenID)
         {
             SicherstellenDassGeladen();
@@ -72,6 +91,11 @@ namespace EasyBankingZinsüberschuss.Datenhaltung
             };
         }
 
+        /// <summary>
+        /// Diese Methode liefert zur angegebenen Periodennummer die zugehörige Zeile in der Tabelle 'Kredite'.
+        /// </summary>
+        /// <param name="periodenID">Periodennummer.</param>
+        /// <returns>Zugehörige Zeile der Tabelle 'Kredite'.</returns>
         public static Kredit Kredit(int periodenID)
         {
             SicherstellenDassGeladen();
@@ -91,6 +115,11 @@ namespace EasyBankingZinsüberschuss.Datenhaltung
             };
         }
 
+        /// <summary>
+        /// Diese Methode liefert zur angegebenen Periodennummer die zugehörige Zeile in der Tabelle 'VoluminaNeugeschäft'.
+        /// </summary>
+        /// <param name="periodenID">Periodennummer.</param>
+        /// <returns>Zugehörige Zeile der Tabelle 'VoluminaNeugeschäft'.</returns>
         public static VolumenNeugeschäft VolumenNeugeschäft(int periodenID)
         {
             SicherstellenDassGeladen();
@@ -113,6 +142,11 @@ namespace EasyBankingZinsüberschuss.Datenhaltung
             };
         }
 
+        /// <summary>
+        /// Diese Methode liefert zur angegebenen Periodennummer die zugehörige Zeile in der Tabelle 'Zinssätze'.
+        /// </summary>
+        /// <param name="periodenID">Periodennummer.</param>
+        /// <returns>Zugehörige Zeile der Tabelle 'Zinssätze'.</returns>
         public static Zinssatz Zinssatz(int periodenID)
         {
             SicherstellenDassGeladen();

@@ -4,7 +4,7 @@ namespace EasyBankingZinsüberschuss.Datenhaltung
 {
     /// <summary>
     /// Entitäts-/Transferklasse zur Aufnahme der Werte einer Zeile der Tabelle 'Perioden'.
-    /// Autor: TODO Name, Matrikelnummer: TODO
+    /// Autor: Oleksandr Yampolskyi 106851
     /// </summary>
     public class Periode
     {

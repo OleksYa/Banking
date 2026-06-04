@@ -2,7 +2,7 @@ namespace EasyBankingZinsüberschuss.Datenhaltung
 {
     /// <summary>
     /// Entitäts-/Transferklasse für die Zinssätze einer Periode bezüglich der sechs Bankprodukte.
-    /// Autor: TODO Name, Matrikelnummer: TODO
+    /// Autor: Oleksandr Yampolskyi 106851
     /// </summary>
     public class Zinssatz
     {

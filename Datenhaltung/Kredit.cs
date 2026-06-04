@@ -1,8 +1,8 @@
 namespace EasyBankingZinsüberschuss.Datenhaltung
 {
     /// <summary>
-    /// Entitäts-/Transferklasse mit Angaben der Verbindlichkeiten und Forderungen der Bank einer Periode.
-    /// Autor: TODO Name, Matrikelnummer: TODO
+    /// Transferklasse mit Angaben der Verbindlichkeiten und Forderungen der Bank einer Periode.
+    /// Autor: Oleksandr Yampolskyi 106851
     /// </summary>
     public class Kredit
     {
